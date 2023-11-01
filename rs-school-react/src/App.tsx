@@ -1,35 +1,44 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Component } from 'react';
+import './App.scss';
+import Search from './components/Search/Search';
+import SearchResults from './components/SearchResults/SearchResults';
+import ErrorContainer from './components/ErrorContainer/ErrorContainer';
+import { IProps } from './types/types';
 
-function App() {
-  const [count, setCount] = useState(0);
+const SEARCH_TERM_NAME = 'SearchTermName';
+const savedTerm = localStorage.getItem(SEARCH_TERM_NAME);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
+interface State {
+  searchTerm: string;
+}
+
+class App extends Component<IProps, State> {
+  state: State = {
+    searchTerm: savedTerm ? savedTerm : '',
+  };
+
+  updateSearchTerm = (value: string) => {
+    const newValue = value.trim();
+
+    if (this.state.searchTerm !== newValue) {
+      this.setState({ searchTerm: newValue });
+      localStorage.setItem(SEARCH_TERM_NAME, newValue);
+    }
+  };
+
+  render() {
+    return (
+      <>
+        <ErrorContainer>
+          <Search
+            searchTerm={this.state.searchTerm}
+            updateSearchTerm={this.updateSearchTerm}
+          />
+          <SearchResults searchTerm={this.state.searchTerm} />
+        </ErrorContainer>
+      </>
+    );
+  }
 }
 
 export default App;
