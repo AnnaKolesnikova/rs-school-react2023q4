@@ -1,5 +1,6 @@
 {
   "name": "rs-school-react",
+  "homepage": "https://annakolesnikova.github.io/rs-school-react/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +11,7 @@
     "preview": "vite preview",
     "format:fix": "prettier . --write",
     "prepare": "cd .. && husky install rs-school-react/.husky",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
