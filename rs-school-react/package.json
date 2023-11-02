@@ -1,6 +1,6 @@
 {
   "name": "rs-school-react",
-  "homepage": "https://annakolesnikova.github.io/rs-school-react/",
+  "homepage": "https://annakolesnikova.github.io/rs-school-react2023q4/rs-school-react/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,6 +19,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
