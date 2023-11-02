@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format:fix": "prettier . --write",
-    "prepare": "cd .. && husky install rs-school-react/.husky"
+    "prepare": "cd .. && husky install rs-school-react/.husky",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
