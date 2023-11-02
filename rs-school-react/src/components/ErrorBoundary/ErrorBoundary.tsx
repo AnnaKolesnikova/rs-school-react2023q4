@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './ErrorContainer.scss';
+import './ErrorBoundary.scss';
 import { IProps } from '../../types/types';
 
 interface State {
