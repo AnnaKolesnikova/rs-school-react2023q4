@@ -35,7 +35,7 @@ class SearchResults extends Component<Props, State> {
       const data = await this.load.getData(searchTerm);
       setTimeout(() => {
         this.setState({ personData: data, load: false });
-      }, 300);
+      }, 200);
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +51,7 @@ class SearchResults extends Component<Props, State> {
           {personData !== null ? (
             personData.length ? (
               personData.map((person: IPerson) => (
-                <PersonCard key={person.id} {...person}></PersonCard>
+                <PersonCard key={person.name} {...person}></PersonCard>
               ))
             ) : (
               <NotFound></NotFound>
