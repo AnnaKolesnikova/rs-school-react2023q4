@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './SearchResults.scss';
 import { getData } from '../../api/LoadData';
-import { IAppProps, IPerson } from '../../types/types';
+import { IAppProps, IPlanet } from '../../types/types';
 import NotFound from '../NotFound/NotFound';
-import PersonCard from '../PersonCard/PersonCard';
+import ItemCard from '../ItemCard/ItemCard';
 
 type Props = Pick<IAppProps, 'searchTerm'>;
 
 export default function SearchResults(props: Props) {
-  const [personData, setPersonData] = useState<IPerson[] | null>(null);
+  const [itemData, setItemData] = useState<IPlanet[] | null>(null);
   const [load, setLoad] = useState(true);
 
   useEffect(() => {
@@ -18,10 +18,10 @@ export default function SearchResults(props: Props) {
 
   const loadData = async (searchTerm: string) => {
     try {
-      const data = await getData(searchTerm);
+      const data = await getData(searchTerm, '/planets');
       console.log('data', data);
       setTimeout(() => {
-        setPersonData(data);
+        setItemData(data);
         setLoad(false);
       }, 200);
     } catch (err) {
@@ -33,10 +33,10 @@ export default function SearchResults(props: Props) {
     <>
       {load ? <div className="loading">Loading....</div> : null}
       <div className="persons-list">
-        {personData !== null ? (
-          personData.length ? (
-            personData.map((person: IPerson) => (
-              <PersonCard key={person.name} {...person}></PersonCard>
+        {itemData !== null ? (
+          itemData.length ? (
+            itemData.map((planet: IPlanet) => (
+              <ItemCard key={planet.name} {...planet}></ItemCard>
             ))
           ) : (
             <NotFound></NotFound>

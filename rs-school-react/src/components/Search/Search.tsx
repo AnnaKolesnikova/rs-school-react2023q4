@@ -1,31 +1,29 @@
-import { FormEvent } from 'react';
-import './Search.scss';
-import { IAppProps } from '../../types/types';
+import { useState } from 'react';
+import SearchResults from '../SearchResults/SearchResults';
+import SearchSection from '../SearchSection/SearchSection';
 
-export default function Search(props: IAppProps) {
-  const SEARCH_INPUT = 'searchInput';
-  const searchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const searchInput = event.currentTarget.elements.namedItem(SEARCH_INPUT);
+const SEARCH_TERM_NAME = 'SearchTermName';
+const savedTerm = localStorage.getItem(SEARCH_TERM_NAME);
 
-    if (searchInput instanceof HTMLInputElement) {
-      searchInput.value = searchInput.value.trim();
-      props.updateSearchTerm(searchInput.value);
+export default function Search() {
+  const [searchTerm, setSearchTerm] = useState(savedTerm ? savedTerm : '');
+
+  const updateSearchTerm = (value: string) => {
+    const newValue = value.trim();
+
+    if (searchTerm !== newValue) {
+      setSearchTerm(newValue);
+      localStorage.setItem(SEARCH_TERM_NAME, newValue);
     }
   };
 
   return (
-    <form className="search-container" onSubmit={searchSubmit}>
-      <input
-        type="text"
-        name={SEARCH_INPUT}
-        placeholder="Type smth..."
-        className="search-input"
-        defaultValue={props.searchTerm}
+    <>
+      <SearchSection
+        searchTerm={searchTerm}
+        updateSearchTerm={updateSearchTerm}
       />
-      <button type="submit" className="search-button">
-        Search
-      </button>
-    </form>
+      <SearchResults searchTerm={searchTerm} />
+    </>
   );
 }

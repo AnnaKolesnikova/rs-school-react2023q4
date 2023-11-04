@@ -1,6 +1,5 @@
 {
   "name": "rs-school-react",
-  "homepage": "https://annakolesnikova.github.io/rs-school-react2023q4/rs-school-react/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,7 +15,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

@@ -1,26 +1,29 @@
-import { IPerson } from '../types/types';
+import { IPlanet } from '../types/types';
 
-const API_URL = 'https://swapi.dev/api/people';
+const API_URL = 'https://swapi.dev/api';
 
-const getDataBySearch = (searchTerm: string): Promise<IPerson[]> => {
-  return fetch(`${API_URL}/?search=${searchTerm}`)
+const getDataBySearch = (
+  searchTerm: string,
+  url: string
+): Promise<IPlanet[]> => {
+  return fetch(`${API_URL}/${url}/search=${searchTerm}`)
     .then((response) => (response.status === 200 ? response.json() : null))
     .then((data) => (data?.results ? data.results : []));
 };
 
-const getAllData = async (): Promise<IPerson[]> => {
-  let allPersons: IPerson[] = [];
+const getAllItems = async (url: string): Promise<IPlanet[]> => {
+  let allItems: IPlanet[] = [];
 
-  const response = await fetch(API_URL);
+  const response = await fetch(`${API_URL}/${url}`);
   const data = await response.json();
 
   if (data && data.results) {
-    allPersons = [...allPersons, ...data.results];
+    allItems = [...allItems, ...data.results];
   }
 
-  return allPersons;
+  return allItems;
 };
 
-export const getData = (searchTerm = ''): Promise<IPerson[]> => {
-  return searchTerm ? getDataBySearch(searchTerm) : getAllData();
+export const getData = (searchTerm = '', url: string): Promise<IPlanet[]> => {
+  return searchTerm ? getDataBySearch(searchTerm, url) : getAllItems(url);
 };
