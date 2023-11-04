@@ -13,14 +13,19 @@ const getDataBySearch = (
 
 const getAllItems = async (url: string): Promise<IPlanet[]> => {
   let allItems: IPlanet[] = [];
+  let page = 1;
+  let totalPages = 1;
 
-  const response = await fetch(`${API_URL}/${url}`);
-  const data = await response.json();
+  while (page <= totalPages) {
+    const response = await fetch(`${API_URL}/${url}?page=${page}`);
+    const data = await response.json();
 
-  if (data && data.results) {
-    allItems = [...allItems, ...data.results];
+    if (data && data.results) {
+      allItems = [...allItems, ...data.results];
+      totalPages = 5;
+    }
+    page++;
   }
-
   return allItems;
 };
 

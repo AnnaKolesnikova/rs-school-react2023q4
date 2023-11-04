@@ -11,6 +11,14 @@ export default function SearchResults(props: Props) {
   const [itemData, setItemData] = useState<IPlanet[] | null>(null);
   const [load, setLoad] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const records = itemData?.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(itemData ? itemData.length / itemsPerPage : 1);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+
   useEffect(() => {
     loadData(props.searchTerm);
     return () => setLoad(true);
@@ -18,8 +26,7 @@ export default function SearchResults(props: Props) {
 
   const loadData = async (searchTerm: string) => {
     try {
-      const data = await getData(searchTerm, '/planets');
-      console.log('data', data);
+      const data = await getData(searchTerm, 'planets');
       setTimeout(() => {
         setItemData(data);
         setLoad(false);
@@ -29,13 +36,57 @@ export default function SearchResults(props: Props) {
     }
   };
 
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCurrentPage(id: number) {
+    setCurrentPage(id);
+  }
+
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
   return (
     <>
       {load ? <div className="loading">Loading....</div> : null}
-      <div className="persons-list">
-        {itemData !== null ? (
-          itemData.length ? (
-            itemData.map((planet: IPlanet) => (
+      <nav>
+        <ul className="pagination">
+          <li className="page-item">
+            <a href="#" className="page-link" onClick={prevPage}>
+              Prev.
+            </a>
+          </li>
+          {numbers.map((n, i) => (
+            <li
+              className={`page-item ${currentPage === n ? 'active' : ''}`}
+              key={i}
+            >
+              <a
+                href="#"
+                className="page-link"
+                onClick={() => changeCurrentPage(n)}
+              >
+                {n}
+              </a>
+            </li>
+          ))}
+          <li className="page-item">
+            <a href="#" className="page-link" onClick={nextPage}>
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div className="items-list">
+        {records !== null ? (
+          records?.length ? (
+            records?.map((planet: IPlanet) => (
               <ItemCard key={planet.name} {...planet}></ItemCard>
             ))
           ) : (
