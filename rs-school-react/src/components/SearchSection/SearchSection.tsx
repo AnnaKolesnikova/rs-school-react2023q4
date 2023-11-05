@@ -2,11 +2,11 @@ import { FormEvent } from 'react';
 import './SearchSection.scss';
 
 interface Props {
-  searchTerm: string;
-  updateSearchTerm: (value: string) => void;
+  searchWord: string;
+  updateSearchWord: (value: string) => void;
 }
 
-export default function SearchSection({ searchTerm, updateSearchTerm }: Props) {
+export default function SearchSection({ searchWord, updateSearchWord }: Props) {
   const SEARCH_INPUT = 'searchInput';
   const searchSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,7 +14,7 @@ export default function SearchSection({ searchTerm, updateSearchTerm }: Props) {
 
     if (searchInput instanceof HTMLInputElement) {
       searchInput.value = searchInput.value.trim();
-      updateSearchTerm(searchInput.value);
+      updateSearchWord(searchInput.value);
     }
   };
 
@@ -25,7 +25,7 @@ export default function SearchSection({ searchTerm, updateSearchTerm }: Props) {
         name={SEARCH_INPUT}
         placeholder="Type smth..."
         className="search-input"
-        defaultValue={searchTerm}
+        defaultValue={searchWord}
       />
       <button type="submit" className="search-button">
         Search

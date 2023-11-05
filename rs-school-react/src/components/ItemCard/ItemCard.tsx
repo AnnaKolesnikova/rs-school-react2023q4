@@ -9,7 +9,7 @@ export default function ItemCard({
 }: IPlanet) {
   return (
     <div className="item-card">
-      <div className="item-name">{name}</div>
+      <h5 className="item-name">{name}</h5>
       <div>
         <img src="https://" alt="" />
       </div>

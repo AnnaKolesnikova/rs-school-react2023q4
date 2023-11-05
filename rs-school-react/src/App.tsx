@@ -1,20 +1,23 @@
 import './App.scss';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {
+  Route,
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+} from 'react-router-dom';
 import Home from './pages/Home';
-import NotFound from './pages/NotFound';
+import ItemDetails from './components/ItemDetails/ItemDetails';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Home />}>
+        <Route path="/details" element={<ItemDetails />} />
+      </Route>
+    </Route>
+  )
+);
 
 export default function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <ErrorBoundary>
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="not-found" element={<NotFound />} />
-          </Routes>
-        </ErrorBoundary>
-      </BrowserRouter>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }

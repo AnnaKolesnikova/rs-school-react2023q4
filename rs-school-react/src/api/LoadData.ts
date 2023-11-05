@@ -2,8 +2,8 @@ import { IPlanet } from '../types/types';
 
 const API_URL = 'https://swapi.dev/api/planets';
 
-const getDataBySearch = (searchTerm: string, page = 1): Promise<IPlanet[]> => {
-  return fetch(`${API_URL}/?page=${page}&search=${searchTerm}`)
+const getDataBySearch = (searchWord: string, page = 1): Promise<IPlanet[]> => {
+  return fetch(`${API_URL}/?page=${page}&search=${searchWord}`)
     .then((response) => (response.status === 200 ? response.json() : null))
     .then((data) => (data?.results ? data.results : []));
 };
@@ -26,10 +26,6 @@ const getAllItems = async (): Promise<IPlanet[]> => {
   return allItems;
 };
 
-// export const getItemData = (id: string): Promise<IPlanet> => {
-//   return fetch(`${API_URL}/${id}`);
-// };
-
-export const getData = (searchTerm = '', page = 1): Promise<IPlanet[]> => {
-  return searchTerm ? getDataBySearch(searchTerm, page) : getAllItems();
+export const getData = (searchWord = '', page = 1): Promise<IPlanet[]> => {
+  return searchWord ? getDataBySearch(searchWord, page) : getAllItems();
 };

@@ -1,7 +1,3 @@
 export default function ItemDetails() {
-  return (
-    <div className="item-details">
-      <div>Details</div>
-    </div>
-  );
+  return <div className="item-details">Item details</div>;
 }

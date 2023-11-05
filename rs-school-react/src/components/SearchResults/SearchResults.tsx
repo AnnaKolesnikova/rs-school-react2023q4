@@ -6,12 +6,12 @@ import NotFound from '../NotFound/NotFound';
 import ItemCard from '../ItemCard/ItemCard';
 
 interface Props {
-  searchTerm: string;
+  searchWord: string;
 }
 
-export default function SearchResults({ searchTerm }: Props) {
+export default function SearchResults({ searchWord }: Props) {
   const [itemData, setItemData] = useState<IPlanet[] | null>(null);
-  const [load, setLoad] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -22,16 +22,16 @@ export default function SearchResults({ searchTerm }: Props) {
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
   useEffect(() => {
-    loadData(searchTerm);
-    return () => setLoad(true);
-  }, [searchTerm]);
+    loadData(searchWord);
+    return () => setLoading(true);
+  }, [searchWord]);
 
-  const loadData = async (searchTerm: string) => {
+  const loadData = async (searchWord: string) => {
     try {
-      const data = await getData(searchTerm);
+      const data = await getData(searchWord);
       setTimeout(() => {
         setItemData(data);
-        setLoad(false);
+        setLoading(false);
       }, 200);
     } catch (err) {
       console.log(err);
@@ -56,7 +56,7 @@ export default function SearchResults({ searchTerm }: Props) {
 
   return (
     <>
-      {load ? <div className="loading">Loading....</div> : null}
+      {loading ? <div className="loading">Loading....</div> : null}
       <nav>
         <ul className="pagination">
           <li className="page-item">

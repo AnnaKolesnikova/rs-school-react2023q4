@@ -4,13 +4,12 @@
   flex-direction: row;
   margin: 0 auto;
   width: 50vw;
-  min-width: 250px;
-  max-width: 500px;
+  width: 30vw;
   box-sizing: border-box;
 
   .search-input {
     height: 40px;
-    padding: 0.5em 3.5em 0.5em 1em;
+    padding: 5px;
     width: 100%;
     box-sizing: border-box;
     border-radius: 2px;
