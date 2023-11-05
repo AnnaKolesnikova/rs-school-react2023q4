@@ -1,18 +1,23 @@
 import { IPlanet } from '../../types/types';
 import './ItemCard.scss';
 
-export default function ItemCard(props: IPlanet) {
+export default function ItemCard({
+  name,
+  climate,
+  created,
+  orbital_period,
+}: IPlanet) {
   return (
     <div className="item-card">
-      <div className="item-name">{props.name}</div>
+      <div className="item-name">{name}</div>
       <div>
         <img src="https://" alt="" />
       </div>
       <div className="item-details">
         <ul>
-          <li>Climate: {props.climate}</li>
-          <li>Created: {props.created}</li>
-          <li>Orbital period: {props.orbital_period}</li>
+          <li>Climate: {climate}</li>
+          <li>Created: {created}</li>
+          <li>Orbital period: {orbital_period}</li>
         </ul>
       </div>
     </div>

@@ -4,11 +4,6 @@ export interface IProps {
   children?: ReactNode;
 }
 
-export interface IAppProps extends IProps {
-  searchTerm: string;
-  updateSearchTerm: (value: string) => void;
-}
-
 export interface IResponse {
   count: number;
   next: string;

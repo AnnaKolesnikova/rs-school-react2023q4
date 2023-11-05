@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import './SearchResults.scss';
 import { getData } from '../../api/LoadData';
-import { IAppProps, IPlanet } from '../../types/types';
+import { IPlanet } from '../../types/types';
 import NotFound from '../NotFound/NotFound';
 import ItemCard from '../ItemCard/ItemCard';
 
-type Props = Pick<IAppProps, 'searchTerm'>;
+interface Props {
+  searchTerm: string;
+}
 
-export default function SearchResults(props: Props) {
+export default function SearchResults({ searchTerm }: Props) {
   const [itemData, setItemData] = useState<IPlanet[] | null>(null);
   const [load, setLoad] = useState(true);
 
@@ -20,9 +22,9 @@ export default function SearchResults(props: Props) {
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
   useEffect(() => {
-    loadData(props.searchTerm);
+    loadData(searchTerm);
     return () => setLoad(true);
-  }, [props.searchTerm]);
+  }, [searchTerm]);
 
   const loadData = async (searchTerm: string) => {
     try {

@@ -6,16 +6,16 @@ interface State {
   hasError: boolean;
 }
 
-class Container extends Component<IProps, State> {
+class ErrorBoundary extends Component<IProps, State> {
   state: State = { hasError: false };
 
   render() {
     if (this.state.hasError) {
-      return <div className="container">Something went wrong</div>;
+      return <div className="error">Something went wrong</div>;
     }
 
     return this.props.children;
   }
 }
 
-export default Container;
+export default ErrorBoundary;
