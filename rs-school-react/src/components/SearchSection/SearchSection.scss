@@ -1,0 +1,30 @@
+.search-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  width: 50vw;
+  width: 30vw;
+  box-sizing: border-box;
+
+  .search-input {
+    height: 40px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: none;
+    box-shadow: 0px 0px 3px gray;
+    outline: none;
+
+    &:focus {
+      border: 1px solid gray;
+    }
+  }
+
+  .search-button {
+    margin: 0 10px;
+    border-radius: 2px;
+    background: #9eb3c8;
+  }
+}
