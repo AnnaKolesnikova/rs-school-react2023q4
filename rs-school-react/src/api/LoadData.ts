@@ -1,23 +1,20 @@
 import { IPlanet } from '../types/types';
 
-const API_URL = 'https://swapi.dev/api';
+const API_URL = 'https://swapi.dev/api/planets';
 
-const getDataBySearch = (
-  searchTerm: string,
-  url: string
-): Promise<IPlanet[]> => {
-  return fetch(`${API_URL}/${url}/search=${searchTerm}`)
+const getDataBySearch = (searchTerm: string, page = 1): Promise<IPlanet[]> => {
+  return fetch(`${API_URL}/?page=${page}&search=${searchTerm}`)
     .then((response) => (response.status === 200 ? response.json() : null))
     .then((data) => (data?.results ? data.results : []));
 };
 
-const getAllItems = async (url: string): Promise<IPlanet[]> => {
+const getAllItems = async (): Promise<IPlanet[]> => {
   let allItems: IPlanet[] = [];
   let page = 1;
   let totalPages = 1;
 
   while (page <= totalPages) {
-    const response = await fetch(`${API_URL}/${url}?page=${page}`);
+    const response = await fetch(`${API_URL}/?page=${page}`);
     const data = await response.json();
 
     if (data && data.results) {
@@ -29,6 +26,10 @@ const getAllItems = async (url: string): Promise<IPlanet[]> => {
   return allItems;
 };
 
-export const getData = (searchTerm = '', url: string): Promise<IPlanet[]> => {
-  return searchTerm ? getDataBySearch(searchTerm, url) : getAllItems(url);
+// export const getItemData = (id: string): Promise<IPlanet> => {
+//   return fetch(`${API_URL}/${id}`);
+// };
+
+export const getData = (searchTerm = '', page = 1): Promise<IPlanet[]> => {
+  return searchTerm ? getDataBySearch(searchTerm, page) : getAllItems();
 };

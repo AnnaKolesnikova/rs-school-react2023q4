@@ -26,7 +26,7 @@ export default function SearchResults(props: Props) {
 
   const loadData = async (searchTerm: string) => {
     try {
-      const data = await getData(searchTerm, 'planets');
+      const data = await getData(searchTerm);
       setTimeout(() => {
         setItemData(data);
         setLoad(false);
