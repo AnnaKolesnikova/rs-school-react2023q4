@@ -9,6 +9,19 @@
   box-sizing: border-box;
   box-shadow: 0px 0px 15px gray;
   border-radius: 2px;
+  position: relative;
+
+  .item-container {
+    display: flex;
+    flex-direction: row;
+
+    .item-img img {
+      margin-top: 5px;
+      width: 70px;
+      height: 100px;
+      border-radius: 5px;
+    }
+  }
 }
 
 .item-details ul {

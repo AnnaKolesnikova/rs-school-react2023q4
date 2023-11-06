@@ -1,20 +1,22 @@
 import './App.scss';
-import {
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-  createRoutesFromElements,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Home from './pages/Home';
-import RootLayout from './layouts/root/RootLayout';
+import ItemDetails from './components/ItemDetails/ItemDetails';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
-    </Route>
-  )
-);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Outlet />,
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: 'page/:id',
+        element: <Home />,
+        children: [{ path: 'details/:id', element: <ItemDetails /> }],
+      },
+    ],
+  },
+]);
 
 export default function App() {
   return <RouterProvider router={router} />;

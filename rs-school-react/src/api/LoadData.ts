@@ -1,31 +1,43 @@
-import { IPlanet } from '../types/types';
+import { ICharacter } from '../types/types';
 
-const API_URL = 'https://swapi.dev/api/planets';
+const API_URL = 'https://swapi.dev/api/people';
 
-const getDataBySearch = (searchWord: string, page = 1): Promise<IPlanet[]> => {
-  return fetch(`${API_URL}/?page=${page}&search=${searchWord}`)
-    .then((response) => (response.status === 200 ? response.json() : null))
-    .then((data) => (data?.results ? data.results : []));
-};
+class LoadData {
+  getDataBySearch = (searchWord: string, page = 1): Promise<ICharacter[]> => {
+    return fetch(`${API_URL}/?page=${page}&search=${searchWord}`)
+      .then((response) => (response.status === 200 ? response.json() : null))
+      .then((data) => (data?.results ? data.results : []));
+  };
 
-const getAllItems = async (): Promise<IPlanet[]> => {
-  let allItems: IPlanet[] = [];
-  let page = 1;
-  let totalPages = 1;
+  async getAllItems(): Promise<ICharacter[]> {
+    let allItems: ICharacter[] = [];
+    let page = 1;
+    let totalPages = 1;
 
-  while (page <= totalPages) {
-    const response = await fetch(`${API_URL}/?page=${page}`);
-    const data = await response.json();
+    while (page <= totalPages) {
+      const response = await fetch(`${API_URL}/?page=${page}`);
+      const data = await response.json();
 
-    if (data && data.results) {
-      allItems = [...allItems, ...data.results];
-      totalPages = 5;
+      if (data && data.results) {
+        allItems = [...allItems, ...data.results];
+        totalPages = 5;
+      }
+      page++;
     }
-    page++;
+    return allItems;
   }
-  return allItems;
-};
 
-export const getData = (searchWord = '', page = 1): Promise<IPlanet[]> => {
-  return searchWord ? getDataBySearch(searchWord, page) : getAllItems();
-};
+  getItemId(url: string): string | null {
+    const idRegExp = /\/([0-9]*)\/$/;
+    const matches = url.match(idRegExp);
+    return matches && matches.length ? matches[1] : null;
+  }
+
+  getData(searchWord = '', page = 1): Promise<ICharacter[]> {
+    return searchWord
+      ? this.getDataBySearch(searchWord, page)
+      : this.getAllItems();
+  }
+}
+
+export default LoadData;
