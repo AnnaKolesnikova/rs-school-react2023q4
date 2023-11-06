@@ -4,7 +4,7 @@ import './ItemCard.scss';
 export default function ItemCard({
   name,
   climate,
-  created,
+  rotation_period,
   orbital_period,
 }: IPlanet) {
   return (
@@ -16,7 +16,7 @@ export default function ItemCard({
       <div className="item-details">
         <ul>
           <li>Climate: {climate}</li>
-          <li>Created: {created}</li>
+          <li>rotation_period: {rotation_period}</li>
           <li>Orbital period: {orbital_period}</li>
         </ul>
       </div>
