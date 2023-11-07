@@ -4,10 +4,11 @@ import LoadData from '../../api/LoadData';
 import { ICharacter } from '../../types/types';
 import NotFound from '../NotFound/NotFound';
 import ItemCard from '../ItemCard/ItemCard';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 interface Props {
   searchWord: string;
+  page: number;
 }
 
 export default function SearchResults({ searchWord }: Props) {
@@ -15,7 +16,7 @@ export default function SearchResults({ searchWord }: Props) {
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 9;
   const lastIndex = currentPage * itemsPerPage;
   const firstIndex = lastIndex - itemsPerPage;
   const records = itemData?.slice(firstIndex, lastIndex);
@@ -41,20 +42,8 @@ export default function SearchResults({ searchWord }: Props) {
     return () => setLoading(true);
   }, [searchWord]);
 
-  function prevPage() {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
-
   function changeCurrentPage(id: number) {
     setCurrentPage(id);
-  }
-
-  function nextPage() {
-    if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
-    }
   }
 
   return (
@@ -62,11 +51,6 @@ export default function SearchResults({ searchWord }: Props) {
       {loading ? <div className="loading">Loading....</div> : null}
       <nav>
         <ul className="pagination">
-          <li className="page-item">
-            <a href="#" className="page-link" onClick={prevPage}>
-              Prev.
-            </a>
-          </li>
           {numbers.map((n, i) => (
             <li
               className={`page-item ${currentPage === n ? 'active' : ''}`}
@@ -81,18 +65,15 @@ export default function SearchResults({ searchWord }: Props) {
               </Link>
             </li>
           ))}
-          <li className="page-item">
-            <a href="#" className="page-link" onClick={nextPage}>
-              Next
-            </a>
-          </li>
         </ul>
       </nav>
       <div className="items-list">
         {records !== null ? (
           records?.length ? (
             records?.map((character: ICharacter) => (
-              <ItemCard key={character.name} {...character}></ItemCard>
+              <NavLink key={character.id} to={`./details/${character.id}`}>
+                <ItemCard {...character}></ItemCard>
+              </NavLink>
             ))
           ) : (
             <NotFound></NotFound>

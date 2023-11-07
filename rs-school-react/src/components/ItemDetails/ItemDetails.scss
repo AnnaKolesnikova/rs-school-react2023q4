@@ -1,11 +1,41 @@
 .item-details {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  color: #000;
+  width: 50%;
+  height: 100%;
+  background: #3b3b3b;
+  color: #fff;
+
+  .details-container {
+    .details-img {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      img {
+        margin: 10px auto;
+        width: 200px;
+        border-radius: 5px;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #fff;
+      background: transparent;
+    }
+
+    .details-list {
+      text-align: center;
+
+      ul {
+        padding-left: 0;
+        list-style-type: none;
+      }
+    }
+  }
 }
 
 .loading {

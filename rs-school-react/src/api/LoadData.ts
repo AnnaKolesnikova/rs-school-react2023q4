@@ -1,6 +1,6 @@
 import { ICharacter } from '../types/types';
 
-const API_URL = 'https://swapi.dev/api/people';
+const API_URL = 'https://rickandmortyapi.com/api/character';
 
 class LoadData {
   getDataBySearch = (searchWord: string, page = 1): Promise<ICharacter[]> => {
@@ -10,27 +10,34 @@ class LoadData {
   };
 
   async getAllItems(): Promise<ICharacter[]> {
-    let allItems: ICharacter[] = [];
-    let page = 1;
-    let totalPages = 1;
+    try {
+      let allItems: ICharacter[] = [];
+      let page = 1;
+      let totalPages = 1;
 
-    while (page <= totalPages) {
-      const response = await fetch(`${API_URL}/?page=${page}`);
-      const data = await response.json();
+      while (page <= totalPages) {
+        const response = await fetch(`${API_URL}/?page=${page}`);
+        const data = await response.json();
 
-      if (data && data.results) {
-        allItems = [...allItems, ...data.results];
-        totalPages = 5;
+        if (data && data.results) {
+          allItems = [...allItems, ...data.results];
+          totalPages = 5;
+        }
+        page++;
       }
-      page++;
+      return allItems;
+    } catch (err) {
+      throw new Error(`Fetching all items error: ${err}`);
     }
-    return allItems;
   }
 
-  getItemId(url: string): string | null {
-    const idRegExp = /\/([0-9]*)\/$/;
-    const matches = url.match(idRegExp);
-    return matches && matches.length ? matches[1] : null;
+  async getItemByID(id: string): Promise<ICharacter> {
+    try {
+      const response = await fetch(`${API_URL}/${id}/`);
+      return response.json();
+    } catch (err) {
+      throw new Error(`Fetching item by id error: ${err}`);
+    }
   }
 
   getData(searchWord = '', page = 1): Promise<ICharacter[]> {

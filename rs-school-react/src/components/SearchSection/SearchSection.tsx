@@ -19,17 +19,20 @@ export default function SearchSection({ searchWord, updateSearchWord }: Props) {
   };
 
   return (
-    <form className="search-container" onSubmit={searchSubmit}>
-      <input
-        type="text"
-        name={SEARCH_INPUT}
-        placeholder="Type smth..."
-        className="search-input"
-        defaultValue={searchWord}
-      />
-      <button type="submit" className="search-button">
-        Search
-      </button>
-    </form>
+    <>
+      <h3>Find your favorite character</h3>
+      <form className="search-container" onSubmit={searchSubmit}>
+        <input
+          type="text"
+          name={SEARCH_INPUT}
+          placeholder="Type here..."
+          className="search-input"
+          defaultValue={searchWord}
+        />
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </form>
+    </>
   );
 }

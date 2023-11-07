@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import SearchResults from '../components/SearchResults/SearchResults';
 import SearchSection from '../components/SearchSection/SearchSection';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 export default function Home() {
   const SEARCH_WORD = 'SearchWord';
@@ -9,6 +10,12 @@ export default function Home() {
   const [searchWord, setSearchWord] = useState(
     storedSearch ? storedSearch : ''
   );
+  const { page_id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!page_id || !Number(page_id)) navigate('/page/1', { replace: true });
+  }, [page_id, navigate]);
 
   const updateSearchWord = (value: string) => {
     const newValue = value.trim();
@@ -24,7 +31,8 @@ export default function Home() {
         searchWord={searchWord}
         updateSearchWord={updateSearchWord}
       />
-      <SearchResults searchWord={searchWord} />
+      <SearchResults searchWord={searchWord} page={+(page_id || 1)} />
+      <Outlet />
     </ErrorBoundary>
   );
 }

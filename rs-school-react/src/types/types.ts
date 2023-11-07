@@ -5,27 +5,27 @@ export interface IProps {
 }
 
 export interface IResponse {
-  count: number;
-  next: string;
-  previous: null;
-  results: ICharacter[];
+  results: CharacterData[];
+  pages: number;
 }
 
 export interface ICharacter {
+  id: number;
   name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
+  status: string;
+  species: string;
+  type: string;
   gender: string;
-  homeworld: string;
-  films: Array<string>;
-  species: Array<string>;
-  vehicles: Array<string>;
-  starships: Array<string>;
-  created: string;
-  edited: string;
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
   url: string;
+  created: string;
 }
