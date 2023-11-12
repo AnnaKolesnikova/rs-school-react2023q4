@@ -1,13 +1,10 @@
-import { FormEvent } from 'react';
+import { FormEvent, useContext } from 'react';
 import './SearchSection.scss';
+import { HomePageContext } from '../../pages/Home';
 
-interface Props {
-  searchWord: string;
-  updateSearchWord: (value: string) => void;
-}
-
-export default function SearchSection({ searchWord, updateSearchWord }: Props) {
+export default function SearchSection() {
   const SEARCH_INPUT = 'searchInput';
+  const { searchWord, updateSearchWord } = useContext(HomePageContext);
   const searchSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const searchInput = event.currentTarget.elements.namedItem(SEARCH_INPUT);
