@@ -80,11 +80,8 @@ export default function Home() {
     <ErrorBoundary>
       {loading ? <div className="loading">Loading....</div> : null}
       <HomePageContext.Provider value={context}>
-        <SearchSection
-          searchWord={searchWord}
-          updateSearchWord={updateSearchWord}
-        />
-        <SearchResults searchWord={searchWord} page={Number(page_id || 1)} />
+        <SearchSection />
+        <SearchResults />
         <Outlet />
       </HomePageContext.Provider>
     </ErrorBoundary>
