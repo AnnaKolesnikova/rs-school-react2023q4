@@ -1,0 +1,22 @@
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin: 15px auto;
+
+  .item-link {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 999;
+  font-size: 20px;
+}
