@@ -1,15 +1,14 @@
 {
   "name": "rs-school-react",
-  "homepage": "https://annakolesnikova.github.io/rs-school-react2023q4/rs-school-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format:fix": "prettier . --write",
+    "format:fix": "prettier ./src --write",
     "prepare": "cd .. && husky install rs-school-react/.husky",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
