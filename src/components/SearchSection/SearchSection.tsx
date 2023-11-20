@@ -1,17 +1,21 @@
-import { FormEvent, useContext } from 'react';
+import { FormEvent } from 'react';
 import './SearchSection.scss';
-import { HomePageContext } from '../../pages/Home';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../state/store';
+import { updateSearchWord } from '../../state/search';
 
 export default function SearchSection() {
   const SEARCH_INPUT = 'searchInput';
-  const { searchWord, updateSearchWord } = useContext(HomePageContext);
+  const searchWord = useSelector((state: RootState) => state.searchWord.value);
+  const dispatch = useDispatch();
+
   const searchSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const searchInput = event.currentTarget.elements.namedItem(SEARCH_INPUT);
 
     if (searchInput instanceof HTMLInputElement) {
       searchInput.value = searchInput.value.trim();
-      updateSearchWord(searchInput.value);
+      dispatch(updateSearchWord(searchInput.value));
     }
   };
 

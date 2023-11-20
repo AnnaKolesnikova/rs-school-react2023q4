@@ -5,29 +5,23 @@ import SearchSection from '../components/SearchSection/SearchSection';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { ICharacter } from '../types/types';
 import LoadData from '../api/LoadData';
+import { RootState } from '../state/store';
+import { useSelector } from 'react-redux';
 
 interface Context {
-  searchWord: string;
   page: number;
-  updateSearchWord: (val: string) => void;
   itemData: ICharacter[] | null;
 }
 
 const defaultContext: Context = {
-  searchWord: '',
   page: 1,
-  updateSearchWord: () => {},
   itemData: null,
 };
 
 export const HomePageContext = createContext<Context>(defaultContext);
 
 export default function Home() {
-  const SEARCH_WORD = 'SearchWord';
-  const storedSearch = localStorage.getItem(SEARCH_WORD);
-  const [searchWord, setSearchWord] = useState(
-    storedSearch ? storedSearch : ''
-  );
+  const searchWord = useSelector((state: RootState) => state.searchWord.value);
   const [itemData, setItemData] = useState<ICharacter[] | null>(null);
   const [loading, setLoading] = useState(false);
   const { page_id } = useParams();
@@ -60,19 +54,9 @@ export default function Home() {
     dataLoading(searchWord, page);
   }, [page_id, navigate, searchWord]);
 
-  const updateSearchWord = (value: string) => {
-    const newValue = value.trim();
-
-    if (searchWord !== newValue) {
-      setSearchWord(newValue);
-      localStorage.setItem(SEARCH_WORD, newValue);
-    }
-  };
-
   const context = {
     searchWord,
     page: Number(page_id || 1),
-    updateSearchWord,
     itemData,
   };
 

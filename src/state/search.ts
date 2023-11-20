@@ -21,4 +21,6 @@ export const search = createSlice({
   },
 });
 
+export const { updateSearchWord } = search.actions;
+
 export default search.reducer;
