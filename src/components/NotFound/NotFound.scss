@@ -1,0 +1,15 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .not-found-heading {
+    padding-bottom: 20px;
+  }
+
+  .not_found_img {
+    img {
+      height: 300px;
+    }
+  }
+}

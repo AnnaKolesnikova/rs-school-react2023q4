@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Home from '../pages/Home';
 import ItemDetails from '../components/ItemDetails/ItemDetails';
+import NotFound from '../components/NotFound/NotFound';
 
 export const appRouter = [
   {
@@ -14,5 +15,6 @@ export const appRouter = [
         children: [{ path: 'details/:item_id', element: <ItemDetails /> }],
       },
     ],
+    errorElement: <NotFound />,
   },
 ];
