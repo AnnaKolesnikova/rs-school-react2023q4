@@ -41,7 +41,7 @@ export default function SearchResults() {
           ))}
         </ul>
       </nav>
-      <div className="items-list">
+      <div className="items-list" data-testid="items-list">
         {records !== null ? (
           records?.length ? (
             records?.map((character: ICharacter) => (
