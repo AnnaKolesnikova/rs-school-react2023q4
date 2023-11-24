@@ -37,7 +37,11 @@ export default function ItemDetails() {
 
   return (
     <>
-      {loading ? <div className="loading">Loading....</div> : null}
+      {loading ? (
+        <div className="loading" data-testid="loading">
+          Loading....
+        </div>
+      ) : null}
       {itemData !== null ? (
         <div className="item-details">
           <div onClick={closeDetails}></div>

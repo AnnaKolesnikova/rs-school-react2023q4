@@ -1,6 +1,6 @@
-import { ICharacter } from '../../src/types/types';
+import { ICharacter } from '../../types/types';
 
-const characterDataMock: ICharacter[] = [
+export const characterDataMock: ICharacter[] = [
   {
     id: 1,
     name: 'Rick Sanchez',

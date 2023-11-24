@@ -29,8 +29,13 @@ export default function SearchSection() {
           placeholder="Type here..."
           className="search-input"
           defaultValue={searchWord}
+          data-testid="search-input"
         />
-        <button type="submit" className="search-button">
+        <button
+          type="submit"
+          className="search-button"
+          data-testid="submit-btn"
+        >
           Search
         </button>
       </form>

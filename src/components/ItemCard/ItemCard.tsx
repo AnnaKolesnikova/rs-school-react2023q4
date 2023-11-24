@@ -3,7 +3,7 @@ import './ItemCard.scss';
 
 export default function ItemCard({ name, image }: ICharacter) {
   return (
-    <div className="item-card">
+    <div className="item-card" data-testid="item-card">
       <h5 className="item-name">{name}</h5>
       <div className="item-container">
         <div className="item-img">

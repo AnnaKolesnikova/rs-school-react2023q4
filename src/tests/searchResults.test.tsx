@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../src/state/store';
+import { store } from '../state/store';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { appRouter } from '../src/routes/router';
+import { appRouter } from '../routes/router';
 
 describe('', () => {
   beforeEach(() => {
