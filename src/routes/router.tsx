@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Home from '../pages/Home';
+import Home from '../pages/HomePage/Home';
 import ItemDetails from '../components/ItemDetails/ItemDetails';
 import NotFound from '../components/NotFound/NotFound';
 

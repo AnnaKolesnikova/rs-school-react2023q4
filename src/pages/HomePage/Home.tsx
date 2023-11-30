@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
-import SearchResults from '../components/SearchResults/SearchResults';
-import SearchSection from '../components/SearchSection/SearchSection';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
+import SearchResults from '../../components/SearchResults/SearchResults';
+import SearchSection from '../../components/SearchSection/SearchSection';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { ICharacter } from '../types/types';
-import LoadData from '../api/LoadData';
-import { RootState } from '../state/store';
+import { ICharacter } from '../../types/types';
+import LoadData from '../../api/LoadData';
+import { RootState } from '../../state/store';
 import { useSelector } from 'react-redux';
 
 interface Context {

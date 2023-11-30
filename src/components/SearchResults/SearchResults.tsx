@@ -4,7 +4,7 @@ import { ICharacter } from '../../types/types';
 import NotFound from '../NotFound/NotFound';
 import ItemCard from '../ItemCard/ItemCard';
 import { Link, NavLink } from 'react-router-dom';
-import { HomePageContext } from '../../pages/Home';
+import { HomePageContext } from '../../pages/HomePage/Home';
 
 export default function SearchResults() {
   const { itemData } = useContext(HomePageContext);
